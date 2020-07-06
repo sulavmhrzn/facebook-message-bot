@@ -1,5 +1,7 @@
 # Facebook Message Bot
 
+[For Instagram](https://github.com/sulavmhrzn/instagram-message-bot)
+
 ## Web Driver
 
 Download your browsers Web Driver
