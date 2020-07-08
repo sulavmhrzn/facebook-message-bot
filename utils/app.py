@@ -4,10 +4,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 import time
 
 
-# Disable browser based alerts
 # 1- to enable
 # 2 - to disable
 option = Options()
@@ -21,7 +21,7 @@ option.add_experimental_option("prefs", {
 
 class Bot:
     def __init__(self, email, password, webd=Chrome):
-        self.driver = Chrome(options=option)
+        self.driver = webd(options=option)
         self.email = email
         self.password = password
 
@@ -36,12 +36,14 @@ class Bot:
     def message_to(self, username):
         self.driver.get(f'https://www.facebook.com/messages/t/{username}')
         time.sleep(5)
-
-        with open('text2.txt', 'r') as file:
-            for word in file.readlines():
-                run = WebDriverWait(self.driver, 5).until(
-                    EC.presence_of_element_located((By.CLASS_NAME, '_1mf'))).send_keys(word, Keys.RETURN)
-                print(word)
+        try:
+            with open('text.txt', 'r') as file:
+                for word in file.readlines():
+                    run = WebDriverWait(self.driver, 5).until(
+                        EC.presence_of_element_located((By.CLASS_NAME, '_1mf'))).send_keys(word, Keys.RETURN)
+                    print(word)
+        except TimeoutException:
+            print("Something went wrong. Please try again.")
 
     def close_browser(self):
         self.driver.close()
