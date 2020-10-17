@@ -5,7 +5,6 @@
 ## Web Driver
 
 Download your browsers Web Driver
-[Firefox](https://github.com/mozilla/geckodriver/releases)
 [Chrome](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 
 ## Installation
